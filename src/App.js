@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { Fragment, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+const Images = React.lazy(() => import("./pages/Images"));
+const Checkboxes = React.lazy(() => import("./pages/Checkboxes"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" exact element={<Images />} />
+          <Route path="/images" exact element={<Images />} />
+          <Route path="/checkboxes" exact element={<Checkboxes />} />
+        </Routes>
+      </Suspense>
+    </Fragment>
   );
 }
 
